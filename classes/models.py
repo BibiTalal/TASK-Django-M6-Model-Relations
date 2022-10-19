@@ -8,7 +8,7 @@ class Course(models.Model):
 class Lecture(models.Model):
     name = models.CharField(max_length=30)
     # many-to-one: lecture is many to check run : pytest -k many_to_one
-    _course=models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lectures")
+    course=models.ForeignKey(Course, on_delete=models.CASCADE, related_name="lectures")
 
     def __str__(self):
         return self.name
@@ -27,6 +27,7 @@ class Slide(models.Model):
 class Assignment(models.Model):
     name = models.CharField(max_length=30)
     link = models.URLField()
+    # one-to-one to check run: pytest -k one_to_one
     lecture=models.OneToOneField(Lecture,on_delete=models.CASCADE,primary_key=True)
 
     def __str__(self):
